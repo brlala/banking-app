@@ -20,3 +20,8 @@ This is the kafka-producer implementation, and some commands to run the server
 8. Try sending 4 messages `.\kafka-console-producer.bat --broker-list localhost:9092 --topic purchases`
 9. Consuming `.\kafka-console-consumer.bat --bootstrap-server localhost:9092 --topic purchases --from-beginning` do note that order is not same because within partition is an ordered queue but there is no order queue between different partitions.
 
+# Implementation in Java
+1. Send message to producer `.\kafka-console-producer.bat --broker-list localhost:9092 --topic events`
+2. Consume message from consumer with a pub/sub pattern, specify all consumer into different groups `java -jar .\kafka-consumer.jar group2`
+3. `java -jar .\kafka-consumer.jar` same group, only one will receive, kafka will do it in a round robin manner
+4. If a message fails to deliver, Kafka will re-deliver when the consumer pulled [check](https://stackoverflow.com/questions/53655696/how-when-the-kafka-message-will-be-redelivered-if-manual-acknowledgment-not-se)
